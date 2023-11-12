@@ -5,11 +5,12 @@ Least Square
 """
 
 import numpy as np
+from costs import compute_loss
 
 
 def least_squares(y, tx):
     """Calculate the least squares solution.
-       returns mse, and optimal weights.
+    returns mse, and optimal weights.
 
     Args:
         y: numpy array of shape (N,), N is the number of samples.
@@ -23,8 +24,8 @@ def least_squares(y, tx):
     (array([ 0.21212121, -0.12121212]), 8.666684749742561e-33)
     """
     # ***************************************************
-    # COPY YOUR CODE FROM EX03 HERE
-    # least squares: TODO
+    w = np.linalg.solve(tx.T@tx, tx.T@y)
+    mse = compute_loss(y,tx,w)
+    return w, mse
     # returns optimal weights, MSE
     # ***************************************************
-    raise NotImplementedError

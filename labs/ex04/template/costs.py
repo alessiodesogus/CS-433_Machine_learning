@@ -4,7 +4,7 @@
 import numpy as np
 
 
-def compute_mse(y, tx, w):
+def compute_loss(y, tx, w):
     """compute the loss by mse.
     Args:
         y: numpy array of shape (N,), N is the number of samples.

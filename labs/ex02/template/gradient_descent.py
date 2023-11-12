@@ -1,35 +1,36 @@
 # -*- coding: utf-8 -*-
-"""Problem Sheet 2.
+"""Gradient Descent"""
 
-Gradient Descent
-"""
-
+import numpy as np
+from costs import compute_loss
 
 def compute_gradient(y, tx, w):
     """Computes the gradient at w.
 
     Args:
-        y: shape=(N, )
-        tx: shape=(N,2)
-        w: shape=(2, ). The vector of model parameters.
+        y: numpy array of shape=(N, )
+        tx: numpy array of shape=(N,2)
+        w: numpy array of shape=(2, ). The vector of model parameters.
 
     Returns:
-        An array of shape (2, ) (same shape as w), containing the gradient of the loss at w.
+        An numpy array of shape (2, ) (same shape as w), containing the gradient of the loss at w.
     """
     # ***************************************************
-    # INSERT YOUR CODE HERE
+    N = y.shape[0]
+    e = y - np.dot(tx, w) #same as before
+    grad = (-1/N)*np.dot(tx.T,e)
+    return np.transpose(grad)
     # TODO: compute gradient vector
     # ***************************************************
-    raise NotImplementedError
 
 
 def gradient_descent(y, tx, initial_w, max_iters, gamma):
     """The Gradient Descent (GD) algorithm.
 
     Args:
-        y: shape=(N, )
-        tx: shape=(N,2)
-        initial_w: shape=(2, ). The initial guess (or the initialization) for the model parameters
+        y: numpy array of shape=(N, )
+        tx: numpy array of shape=(N,2)
+        initial_w: numpy array of shape=(2, ). The initial guess (or the initialization) for the model parameters
         max_iters: a scalar denoting the total number of iterations of GD
         gamma: a scalar denoting the stepsize
 
@@ -43,16 +44,16 @@ def gradient_descent(y, tx, initial_w, max_iters, gamma):
     w = initial_w
     for n_iter in range(max_iters):
         # ***************************************************
-        # INSERT YOUR CODE HERE
+        gradient = compute_gradient(y,tx, w)
+        loss = compute_loss(y, tx, w)
+        
         # TODO: compute gradient and loss
         # ***************************************************
-        raise NotImplementedError
         # ***************************************************
-        # INSERT YOUR CODE HERE
+        w = w - gamma*gradient
+        
         # TODO: update w by gradient
         # ***************************************************
-        raise NotImplementedError
-
         # store w and loss
         ws.append(w)
         losses.append(loss)
